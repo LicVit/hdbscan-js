@@ -1,4 +1,8 @@
 node_modules
 .DS_STORE
-dist
+dist/*
+!dist/hdbscan.d.ts
+!dist/hdbscan.esm.js
+!dist/hdbscan.js
+!dist/hdbscan.min.js
 *.tgz

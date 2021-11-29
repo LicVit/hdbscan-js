@@ -1,4 +1,4 @@
-import { DebugInfo, HdbscanInput } from "./types";
+import { DebugInfo, HdbscanInput } from './types';
 export declare class Hdbscan {
     private input;
     private minClusterSize;

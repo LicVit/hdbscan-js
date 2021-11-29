@@ -1,8 +1,8 @@
-import { computeStabilities, condenseTree, getClusterNodes, getClustersAndNoise, labelClusters } from "./clusterTree";
-import kdTreePrim from "./kdTreePrim";
-import { euclidean } from "./metrics";
-import { DebugInfo, MetricFunction, HdbscanInput } from "./types";
-import { mstToBinaryTree } from "./mst";
+import { computeStabilities, condenseTree, getClusterNodes, getClustersAndNoise, labelClusters } from './clusterTree';
+import kdTreePrim from './kdTreePrim';
+import { euclidean } from './metrics';
+import { DebugInfo, MetricFunction, HdbscanInput } from './types';
+import { mstToBinaryTree } from './mst';
 
 export class Hdbscan {
     private input: Array<Array<number>>;
@@ -16,14 +16,7 @@ export class Hdbscan {
     private clusters: Array<Array<number>>;
     private noise: Array<number>;
 
-    constructor({
-        input,
-        minClusterSize = 5,
-        minSamples = 5,
-        alpha = 1.0,
-        metric = euclidean,
-        debug = false
-    }: HdbscanInput) {
+    constructor({ input, minClusterSize = 5, minSamples = 5, alpha = 1.0, metric = euclidean, debug = false }: HdbscanInput) {
         this.input = input;
         this.minClusterSize = minClusterSize;
         this.minSamples = minSamples;
@@ -46,14 +39,14 @@ export class Hdbscan {
             const { bfsNodes, condensedTree } = condenseTree(singleLinkage, this.minClusterSize);
 
             if (this.debug) {
-                debugInfo = { ...debugInfo, bfsNodes, condensedTree }
+                debugInfo = { ...debugInfo, bfsNodes, condensedTree };
             }
 
             // Compute stabilities of condensed clusters
             const stabilityDict = computeStabilities(condensedTree);
 
             if (this.debug) {
-                debugInfo = { ...debugInfo, condensedTree }
+                debugInfo = { ...debugInfo, condensedTree };
             }
 
             // Extract the clusters
@@ -81,7 +74,6 @@ export class Hdbscan {
             this.debugInfo = debugInfo;
             this.clusters = clusters;
             this.noise = noise;
-
         } catch (e) {
             if (this.debug) {
                 console.debug('debugInfo: ', debugInfo);
